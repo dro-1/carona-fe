@@ -86,9 +86,9 @@ export const Homepage = () => {
               Get where you need to go, safely and affordably
             </h1>
             <p className="mt-4 text-[16px]">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Reiciendis hic eaque iusto amet natus fuga voluptate aspernatur
-              modi eius, commodi optio dignissimos voluptates.
+              With Carona, you get to share the ride with people going your way,
+              enjoy a more comfortable commute, and maybe even make a few new
+              friends along the way.
             </p>
             <div className="flex justify-between md:justify-normal items-center mt-6">
               <button className="bg-[#319A64] border-[#319A64] border-2 p-4 rounded-xl text-lg md:mr-4">
