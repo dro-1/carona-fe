@@ -8,25 +8,19 @@
   box-sizing: border-box;
 }
 
-html,
-body {
-  font-family: Poppins;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.homepage h1,
+.homepage h2,
+.homepage h3,
+.homepage h4,
+.homepage h5,
+.homepage h6 {
   font-family: Syne;
 }
 
-a,
-input,
-button,
-textarea {
-  font-family: Poppins;
+.dashboard input,
+.dashboard a,
+.dashboard button {
+  font-family: Inter;
 }
 
 .hero-bg {

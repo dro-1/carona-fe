@@ -1,5 +1,5 @@
-import { CaronaCard } from "../components/carona-card";
-import { Navbar } from "../components/navbar";
+import { CaronaCard } from "../components/home/carona-card";
+import { Navbar } from "../components/shared/navbar";
 import heroImage from "./../assets/images/hero-image.png";
 import checkmark from "./../assets/svg/check.svg";
 import shuttle from "./../assets/images/shuttle.jpg";
@@ -10,7 +10,7 @@ import { SiYourtraveldottv } from "react-icons/si";
 import { IoMdBusiness } from "react-icons/io";
 import { MdCommute } from "react-icons/md";
 import { MdOutlineTravelExplore } from "react-icons/md";
-import { Footer } from "../components/footer";
+import { Footer } from "../components/shared/footer";
 
 const features = [
   "Easy-to-use web app",
@@ -67,7 +67,12 @@ const services = [
 
 export const Homepage = () => {
   return (
-    <div>
+    <div
+      style={{
+        fontFamily: "Poppins",
+      }}
+      className="homepage"
+    >
       <Navbar />
       <section className="min-h-[100vh] md:min-h-[800px] hero-bg rounded-3xl relative -top-8 text-white p-6 md:flex md:items-center md:justify-center">
         <div className="md:flex md:items-center">
@@ -102,9 +107,14 @@ export const Homepage = () => {
         </div>
       </section>
       <section className="px-6 mt-16 lg md:flex md:flex-wrap md:justify-between max-w-[1200px] mx-auto">
-        <CaronaCard title="Carona Shuttle X" subtitle="1 - 4 Passengers" />
-        <CaronaCard title="Carona Shuttle XL" subtitle="1 - 6 Passengers" />
-        <CaronaCard title="Carona Biz" subtitle="20 - 30 Passengers" />
+        <CaronaCard
+          title="Carona Go"
+          subtitle="Book a ride on our available routes"
+        />
+        <CaronaCard
+          title="Carona Share"
+          subtitle="Carpool with other vetted riders"
+        />
       </section>
       <section className="mt-24 px-6">
         <div className="lg:flex lg:items-center lg:justify-between max-w-[1200px] mx-auto">

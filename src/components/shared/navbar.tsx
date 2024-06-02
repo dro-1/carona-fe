@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import logo from "./../assets/svg/logo.svg";
-import menu from "./../assets/svg/menu.svg";
+import logo from "src/assets/svg/logo.svg";
+import menu from "src/assets/svg/menu.svg";
 import { IoMdClose } from "react-icons/io";
 import clsx from "clsx";
 import { useState } from "react";
@@ -26,6 +26,7 @@ const navbarLinks = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="relative">
       <nav className=" flex justify-between items-center w-full p-8 pb-16 max-w-[1000px] mx-auto">

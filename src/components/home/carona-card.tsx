@@ -1,4 +1,4 @@
-import car from "./../assets/images/sedan.png";
+import car from "src/assets/images/sedan.png";
 
 export const CaronaCard: React.FC<{ title: string; subtitle: string }> = ({
   title,
