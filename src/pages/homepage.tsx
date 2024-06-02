@@ -6,10 +6,10 @@ import shuttle from "./../assets/images/shuttle.jpg";
 import shield from "./../assets/svg/shield-check.svg";
 import car from "./../assets/svg/car.svg";
 import stepImage from "./../assets/images/steps.png";
-import { SiYourtraveldottv } from "react-icons/si";
+// import {  } from "react-icons/si";
 import { IoMdBusiness } from "react-icons/io";
 import { MdCommute } from "react-icons/md";
-import { MdOutlineTravelExplore } from "react-icons/md";
+import { MdOutlineTravelExplore, MdMuseum } from "react-icons/md";
 import { Footer } from "../components/shared/footer";
 
 const features = [
@@ -46,7 +46,7 @@ const services = [
   {
     title: "Tourists",
     text: "Easily convey a group of tourists from one tourist attraction to the other",
-    icon: SiYourtraveldottv,
+    icon: MdMuseum,
   },
   {
     title: "Businesses",
