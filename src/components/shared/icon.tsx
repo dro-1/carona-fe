@@ -26,9 +26,13 @@ import clock from "src/assets/svg/clock.svg";
 import clockActive from "src/assets/svg/clock-active.svg";
 import logo2 from "src/assets/svg/logo2.svg";
 import ticket from "src/assets/svg/ticket.svg";
+import cancel from "src/assets/svg/cancel.svg";
+import info from "src/assets/svg/info.svg";
 
 const iconTypes = {
   add,
+  cancel,
+  info,
   calendarEmpty,
   carDark,
   debitCard,

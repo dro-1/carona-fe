@@ -6,6 +6,9 @@ export default {
       boxShadow: {
         vehicleIcon: "0px 0px 4px 0px #0000001A",
       },
+      fontFamily: {
+        inter: "Inter",
+      },
       colors: {
         primary: {
           10: "#0B996F",

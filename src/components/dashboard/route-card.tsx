@@ -1,8 +1,16 @@
-import { Route } from "src/utils/types";
+import { Route } from "src/utils/types/client-types";
 import { Icon } from "../shared/icon";
 import { Image } from "../shared/image";
+import { useContext } from "react";
+import {
+  OverlayContext,
+  OverlayContextType,
+} from "src/context/overlay.context";
 
 export const RouteCard: React.FC<{ route?: Route }> = () => {
+  const { setRouteOverlayOpened } = useContext(
+    OverlayContext
+  ) as OverlayContextType;
   return (
     <div className="border border-border rounded-lg px-4 py-5">
       <div className="flex w-full justify-between">
@@ -76,7 +84,10 @@ export const RouteCard: React.FC<{ route?: Route }> = () => {
                 22 Sep, 2024
               </em>
             </div>
-            <button className="flex items-center font-medium text-sm text-black">
+            <button
+              className="flex items-center font-medium text-sm text-black"
+              onClick={() => setRouteOverlayOpened(true)}
+            >
               <span className="mr-2">See Route</span>
               <Icon type="greaterThan" />
             </button>

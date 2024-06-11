@@ -11,6 +11,7 @@ import { IoMdBusiness } from "react-icons/io";
 import { MdCommute } from "react-icons/md";
 import { MdOutlineTravelExplore, MdMuseum } from "react-icons/md";
 import { Footer } from "../components/shared/footer";
+import { Link } from "react-router-dom";
 
 const features = [
   "Easy-to-use web app",
@@ -96,9 +97,12 @@ export const Homepage = () => {
               friends along the way.
             </p>
             <div className="flex justify-between md:justify-normal items-center mt-6">
-              <button className="bg-[#319A64] border-[#319A64] border-2 p-4 rounded-xl text-lg md:mr-4">
+              <Link
+                to="/login"
+                className="bg-[#319A64] border-[#319A64] border-2 p-4 rounded-xl text-lg md:mr-4"
+              >
                 Book Your Ride
-              </button>
+              </Link>
               <button className="bg-transparent border-white border-2 p-4 rounded-xl text-lg">
                 Learn More
               </button>

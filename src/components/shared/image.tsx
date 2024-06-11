@@ -1,9 +1,11 @@
 import { ComponentPropsWithoutRef, FC } from "react";
 
 import userImage from "src/assets/images/user-image.png";
+import map from "src/assets/images/map.png";
 
 const imageTypes = {
   userImage,
+  map,
 };
 
 // type K =

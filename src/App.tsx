@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { Homepage } from "./pages/homepage";
-import { Register } from "./pages/register";
-import { Login } from "./pages/login";
-import { Dashboard } from "./pages/dashboard";
+import { Homepage } from "./pages/home.page";
+import { Register } from "./pages/register.page";
+import { Login } from "./pages/login.page";
+import { Dashboard } from "./components/dashboard/dashboard";
+import { CaronaGoPage } from "./pages/carona-go.page";
+import { CaronaSharePage } from "./pages/carona-share.page";
+import { Verify } from "./pages/verify.page";
 
 function App() {
   return (
@@ -10,12 +13,16 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/carona-go" element={<Dashboard />} />
-      <Route path="/carona-share" element={<Dashboard />} />
-      <Route path="/payments" element={<Dashboard />} />
-      <Route path="/transactions" element={<Dashboard />} />
-      <Route path="/settings" element={<Dashboard />} />
-      <Route path="/support" element={<Dashboard />} />
+      <Route path="/verify" element={<Verify />} />
+
+      <Route path="/dashboard/" element={<Dashboard />}>
+        <Route path="carona-go" element={<CaronaGoPage />} />
+        <Route path="carona-share" element={<CaronaSharePage />} />
+        <Route path="payments" element={<CaronaSharePage />} />
+        <Route path="transactions" element={<CaronaSharePage />} />
+        <Route path="settings" element={<CaronaSharePage />} />
+        <Route path="support" element={<CaronaSharePage />} />
+      </Route>
     </Routes>
   );
 }

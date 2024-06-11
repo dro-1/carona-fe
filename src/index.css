@@ -29,3 +29,41 @@
   background-position: center;
   background-size: cover;
 }
+
+.loader {
+  border: 4px solid transparent;
+  border-top-color: currentcolor;
+  border-radius: 50%;
+  animation: 1s loader linear infinite;
+  position: relative;
+  color: inherit;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+.loader::before {
+  content: "";
+  display: block;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  border: 4px solid currentcolor;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+td {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

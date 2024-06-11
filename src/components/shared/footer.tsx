@@ -51,8 +51,8 @@ export const Footer = () => {
             <div className="mt-6 mb-8 sm:my-0">
               <h2 className="text-xl">Quick Links</h2>
               <ul>
-                {quickLinks.map((quickLink) => (
-                  <li className="my-4 underline">
+                {quickLinks.map((quickLink, idx) => (
+                  <li key={idx} className="my-4">
                     <Link to={quickLink.url}>{quickLink.text}</Link>
                   </li>
                 ))}
@@ -61,8 +61,8 @@ export const Footer = () => {
             <div className="mb-8 sm:my-0">
               <h2 className="text-xl">Support</h2>
               <ul>
-                {supportLinks.map((supportLink) => (
-                  <li className="my-4 underline">
+                {supportLinks.map((supportLink, idx) => (
+                  <li key={idx} className="my-4">
                     <Link to={supportLink.url}>{supportLink.text}</Link>
                   </li>
                 ))}
