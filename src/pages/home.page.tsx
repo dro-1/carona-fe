@@ -212,8 +212,11 @@ export const Homepage = () => {
           suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur.{" "}
         </p>
         <div className="mt-8 lg:flex lg:justify-between">
-          {services.map((service) => (
-            <div className="rounded-2xl border border-primary-20 p-8 mb-4 lg:max-w-[300px]">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className="rounded-2xl border border-primary-20 p-8 mb-4 lg:max-w-[300px]"
+            >
               <div className="h-[50px] w-[50px] rounded-full bg-primary-20 flex justify-center items-center">
                 <service.icon className="text-primary-10 text-2xl" />
               </div>

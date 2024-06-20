@@ -1,4 +1,4 @@
-import { RouteCard } from "src/components/dashboard/route-card";
+// import { RouteCard } from "src/components/dashboard/route-card";
 import { Icon } from "src/components/shared/icon";
 
 export const CaronaSharePage = () => {
@@ -38,8 +38,8 @@ export const CaronaSharePage = () => {
         </div>
       </header>
       <section className="px-5 mt-5 mb-10 space-y-6">
-        <RouteCard />
-        <RouteCard />
+        {/* <RouteCard />
+        <RouteCard /> */}
       </section>
     </div>
   );

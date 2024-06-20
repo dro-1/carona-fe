@@ -8,8 +8,12 @@ import {
   OverlayContext,
   OverlayContextType,
 } from "src/context/overlay.context";
-import { Route } from "./route";
 import { UserContext, UserContextType } from "src/context/user.context";
+import { RouteOverlay } from "./route-overlay";
+// import { useQuery } from "@tanstack/react-query";
+// import { QueryKeys } from "src/utils/query-keys";
+// import { getUser } from "src/api/api";
+// import { Loader } from "../shared/loader";
 
 type UrlLink = {
   inactiveIcon: IconType;
@@ -67,8 +71,13 @@ export const Dashboard = () => {
   const { user } = useContext(UserContext) as UserContextType;
   const navigate = useNavigate();
 
+  // const { isPending: isUserDataPending, data: userData } = useQuery({
+  //   queryKey: [QueryKeys.getUser],
+  //   queryFn: () => getUser(user?._id ?? ""),
+  // });
+
   useEffect(() => {
-    if (!user || !localStorage.getItem("accessToken")) navigate("/login");
+    if (!localStorage.getItem("accessToken")) navigate("/login");
   }, [user]);
 
   return (
@@ -80,7 +89,7 @@ export const Dashboard = () => {
     >
       {isRouteOverlayOpened && (
         <Overlay>
-          <Route route={{ from: "Oshodi", to: "VI" }} />
+          <RouteOverlay />
         </Overlay>
       )}
 
@@ -180,17 +189,13 @@ export const Dashboard = () => {
           </section>
           <div className="grow" />
           <div className="border-t border-[#EAECF0] flex items-center">
-            <Image
-              type="userImage"
-              alt=""
-              className="w-10 h-10 rounded-full mr-3"
-            />
+            <Image type="user" alt="" className="w-10 h-10 rounded-full mr-3" />
             <div className="flex flex-col justify-center py-7">
               <em className="not-italic font-semibold text-sm block mb-2 text-dark">
-                Jenny Wilson
+                {user?.firstName} {user?.lastName}
               </em>
               <em className="not-italic font-medium text-xs text-dim">
-                jennywilson@gmail.com
+                {user?.email}
               </em>
             </div>
             <div className="grow" />

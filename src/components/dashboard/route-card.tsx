@@ -1,74 +1,85 @@
-import { Route } from "src/utils/types/client-types";
+import { Route, RouteType } from "src/utils/types/api-types";
 import { Icon } from "../shared/icon";
-import { Image } from "../shared/image";
 import { useContext } from "react";
 import {
   OverlayContext,
   OverlayContextType,
 } from "src/context/overlay.context";
+import clsx from "clsx";
 
-export const RouteCard: React.FC<{ route?: Route }> = () => {
-  const { setRouteOverlayOpened } = useContext(
+export const RouteCard: React.FC<{ route: Route; type: RouteType }> = ({
+  route,
+  type,
+}) => {
+  const { setRouteOverlayOpened, setOverlayRoute } = useContext(
     OverlayContext
   ) as OverlayContextType;
   return (
     <div className="border border-border rounded-lg px-4 py-5">
       <div className="flex w-full justify-between">
         {/* vehicle details */}
-        <div className="w-[48%]">
-          <div className="border-b border-border py-[12px] flex items-center">
-            <div className="p-2 border border-dim shadow-vehicleIcon mr-3 rounded-lg">
-              <Icon type="carDark" />
+        {type == RouteType.share && (
+          <div className="w-[48%]">
+            <div className="border-b border-border py-[12px] flex items-center">
+              <div className="p-2 border border-dim shadow-vehicleIcon mr-3 rounded-lg">
+                <Icon type="carDark" />
+              </div>
+              <h2 className="font-semibold text-base text-black">
+                Vehicle Details
+              </h2>
             </div>
-            <h2 className="font-semibold text-base text-black">
-              Vehicle Details
-            </h2>
+            <div className="mt-2 flex space-x-5 justify-between">
+              <div className="px-2 py-3">
+                <h3 className="font-medium text-xs text-dim text-center mb-3">
+                  Type
+                </h3>
+                <em className="not-italic text-black font-semibold text-sm block text-center">
+                  SUV
+                </em>
+              </div>
+              <div className="px-2 py-3">
+                <h3 className="font-medium text-xs text-dim text-center mb-3">
+                  Model
+                </h3>
+                <em className="not-italic text-black font-semibold text-sm block text-center">
+                  Toyota Camry
+                </em>
+              </div>
+              <div className="px-2 py-3">
+                <h3 className="font-medium text-xs text-dim text-center mb-3">
+                  Colour
+                </h3>
+                <em className="not-italic text-black font-semibold text-sm block text-center">
+                  Red
+                </em>
+              </div>
+              <div className="px-2 py-3">
+                <h3 className="font-medium text-xs text-dim text-center mb-3">
+                  License Plates
+                </h3>
+                <em className="not-italic text-black font-semibold text-sm block text-center">
+                  XMV9DA
+                </em>
+              </div>
+              <div className="px-2 py-3">
+                <h3 className="font-medium text-xs text-dim text-center mb-3">
+                  Available Seats
+                </h3>
+                <em className="not-italic text-black font-semibold text-sm block text-center">
+                  2
+                </em>
+              </div>
+            </div>
           </div>
-          <div className="mt-2 flex space-x-5 justify-between">
-            <div className="px-2 py-3">
-              <h3 className="font-medium text-xs text-dim text-center mb-3">
-                Type
-              </h3>
-              <em className="not-italic text-black font-semibold text-sm block text-center">
-                SUV
-              </em>
-            </div>
-            <div className="px-2 py-3">
-              <h3 className="font-medium text-xs text-dim text-center mb-3">
-                Model
-              </h3>
-              <em className="not-italic text-black font-semibold text-sm block text-center">
-                Toyota Camry
-              </em>
-            </div>
-            <div className="px-2 py-3">
-              <h3 className="font-medium text-xs text-dim text-center mb-3">
-                Colour
-              </h3>
-              <em className="not-italic text-black font-semibold text-sm block text-center">
-                Red
-              </em>
-            </div>
-            <div className="px-2 py-3">
-              <h3 className="font-medium text-xs text-dim text-center mb-3">
-                License Plates
-              </h3>
-              <em className="not-italic text-black font-semibold text-sm block text-center">
-                XMV9DA
-              </em>
-            </div>
-            <div className="px-2 py-3">
-              <h3 className="font-medium text-xs text-dim text-center mb-3">
-                Available Seats
-              </h3>
-              <em className="not-italic text-black font-semibold text-sm block text-center">
-                2
-              </em>
-            </div>
-          </div>
-        </div>
+        )}
+
         {/* trip details */}
-        <div className="w-[48%]">
+        <div
+          className={clsx(
+            type == RouteType.go && "w-full",
+            type == RouteType.share && "w-[48%]"
+          )}
+        >
           <div className="border-b border-border py-[12px] flex items-center justify-between">
             <div className="flex items-center">
               <div className="p-2 border border-dim shadow-vehicleIcon mr-3 rounded-lg w-[30px]">
@@ -86,46 +97,49 @@ export const RouteCard: React.FC<{ route?: Route }> = () => {
             </div>
             <button
               className="flex items-center font-medium text-sm text-black"
-              onClick={() => setRouteOverlayOpened(true)}
+              onClick={() => {
+                setOverlayRoute(route);
+                setRouteOverlayOpened(true);
+              }}
             >
               <span className="mr-2">See Route</span>
               <Icon type="greaterThan" />
             </button>
           </div>
           <div className="mt-2 flex space-x-5 justify-between items-center">
-            <div className="px-2 py-3">
+            <div className="px-2 py-3 w-[200px]">
               <h2 className="mb-3">
                 <span className="font-medium text-xs text-dim">Depart: </span>
-                <span className="font-medium text-xs text-lightGreen">
+                {/* <span className="font-medium text-xs text-lightGreen">
                   10:00 AM
-                </span>
+                </span> */}
               </h2>
-              <p className="font-medium text-xs text-black">
-                Oshodi Interchange Terminal
-              </p>
+              <p className="font-medium text-xs text-black">{route.start}</p>
             </div>
-            <div>
-              <h2 className="font-medium text-xs text-dim mb-3">
+            <div className="w-[200px]">
+              <h2 className="font-medium text-xs text-dim mb-3 text-center">
                 Estimated time
               </h2>
               <em className="not-italic block text-center text-sm text-black font-medium">
-                4hr 15m
+                {route.estimatedTravelTime}
               </em>
             </div>
-            <div className="px-2 py-3">
-              <h2 className="mb-3">
+            <div className="px-2 py-3 w-[200px] text-right">
+              <h2 className="mb-3 text-right">
                 <span className="font-medium text-xs text-dim">Arrive: </span>
-                <span className="font-medium text-xs text-lightBlue">
+                {/* <span className="font-medium text-xs text-lightBlue">
                   2:00PM
-                </span>
+                </span> */}
               </h2>
-              <p className="font-medium text-xs text-black">Victoria Island</p>
+              <p className="font-medium text-xs text-black inline-block">
+                {route.end}
+              </p>
             </div>
           </div>
         </div>
       </div>
       {/* driver */}
-      <div className="mt-4 px-3 py-2 flex justify-between items-center bg-[#F5F6F7] border border-border rounded-lg">
+      {/* <div className="mt-4 px-3 py-2 flex justify-between items-center bg-[#F5F6F7] border border-border rounded-lg">
         <div className="flex">
           <Image
             type="userImage"
@@ -147,7 +161,7 @@ export const RouteCard: React.FC<{ route?: Route }> = () => {
             Buy Ticket
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

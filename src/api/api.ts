@@ -40,3 +40,11 @@ export const verifyUser = ({ email, otp }: VerifyUserType) => {
 export const getAllRoutes = () => {
   return axiosInstance.get(ApiRoutes.allRoutes);
 };
+
+export const getUser = (userId: string) => {
+  return axiosInstance.get(ApiRoutes.getUser(userId));
+};
+
+export const getRouteInfo = (routeId: string) => {
+  return axiosInstance.post(ApiRoutes.getRouteInfo(routeId));
+};

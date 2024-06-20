@@ -4,12 +4,15 @@ import { RouteCard } from "src/components/dashboard/route-card";
 import { Icon } from "src/components/shared/icon";
 import { Loader } from "src/components/shared/loader";
 import { QueryKeys } from "src/utils/query-keys";
+import { Route, RouteType } from "src/utils/types/api-types";
 
 export const CaronaGoPage = () => {
-  const { isPending: areRoutesPending } = useQuery({
+  const { isPending: areRoutesPending, data: routeData } = useQuery({
     queryKey: [QueryKeys.allRoutes],
     queryFn: () => getAllRoutes(),
   });
+
+  const routes = routeData?.data.data;
 
   return (
     <div className="grow">
@@ -47,14 +50,11 @@ export const CaronaGoPage = () => {
         </div>
       </header>
       <section className="px-5 mt-5 mb-10 space-y-6">
-        {areRoutesPending ? (
-          <Loader className="w-8 h-8 mx-auto my-8" />
-        ) : (
-          <>
-            <RouteCard />
-            <RouteCard />
-          </>
-        )}
+        {areRoutesPending && <Loader className="w-8 h-8 mx-auto my-8" />}
+        {routes &&
+          routes.map((route: Route, idx: number) => (
+            <RouteCard type={RouteType.go} key={idx} route={route} />
+          ))}
       </section>
     </div>
   );

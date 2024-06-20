@@ -25,3 +25,18 @@ export type User = {
   lastName: string;
   email: string;
 };
+
+export type Route = {
+  start: string;
+  end: string;
+  estimatedTravelTime: string;
+  distance: string;
+  startLatLong: number;
+  endLatLong: number;
+  _id: string;
+};
+
+export enum RouteType {
+  go,
+  share,
+}

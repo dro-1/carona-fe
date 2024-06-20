@@ -62,8 +62,8 @@ export const Navbar = () => {
         <img src={logo} className="w-[200px] mt-4" />
 
         <ul className="mt-8">
-          {navbarLinks.map((navbarLink) => (
-            <li className="my-4">
+          {navbarLinks.map((navbarLink, idx) => (
+            <li key={idx} className="my-4">
               <Link to={navbarLink.url}>{navbarLink.title}</Link>
             </li>
           ))}
