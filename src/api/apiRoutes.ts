@@ -3,6 +3,7 @@ export const ApiRoutes = {
   login: "/auth/login",
   verify: (email: string) => `/auth/verifyUser?email=${email}`,
   allRoutes: "/routes",
-  getUser: (userId: string) => `/auth/getUser/${userId}`,
+  getUser: "/auth/getUser/",
   getRouteInfo: (routeId: string) => `/routes/${routeId}/trips`,
+  pay: (tripId: string) => `/payments/pay/${tripId}`,
 };

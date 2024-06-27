@@ -23,7 +23,7 @@ export const CaronaSharePage = () => {
               className="grow w-full outline-none"
             />
           </div>
-          <button className="w-[130px] rounded-lg border-border border flex justify-center items-center px-4 py-[10px]">
+          {/* <button className="w-[130px] rounded-lg border-border border flex justify-center items-center px-4 py-[10px]">
             <Icon type="filter" className="mr-2" />
             <em className="not-italic font-medium text-sm text-black">
               Filter
@@ -34,7 +34,7 @@ export const CaronaSharePage = () => {
             <em className="not-italic font-medium text-sm text-white">
               New Trip
             </em>
-          </button>
+          </button> */}
         </div>
       </header>
       <section className="px-5 mt-5 mb-10 space-y-6">

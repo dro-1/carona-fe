@@ -3,4 +3,5 @@ export const MutationKeys = {
   login: "login",
   verifyUser: "verify-user",
   getRouteInfo: "get-route-info",
+  getPaymentLink: "get-payment-link",
 };

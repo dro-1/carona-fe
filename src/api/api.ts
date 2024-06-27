@@ -11,7 +11,9 @@ export const BASE_URL = "https://carona-6a9f.onrender.com/api";
 export const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("accessToken") ?? ""}`,
+    Authorization: localStorage.getItem("accessToken")
+      ? `Bearer ${localStorage.getItem("accessToken")}`
+      : "",
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
     Expires: "0",
@@ -41,10 +43,14 @@ export const getAllRoutes = () => {
   return axiosInstance.get(ApiRoutes.allRoutes);
 };
 
-export const getUser = (userId: string) => {
-  return axiosInstance.get(ApiRoutes.getUser(userId));
+export const getUser = () => {
+  return axiosInstance.get(ApiRoutes.getUser);
 };
 
 export const getRouteInfo = (routeId: string) => {
   return axiosInstance.post(ApiRoutes.getRouteInfo(routeId));
+};
+
+export const getPaymentLink = (tripId: string) => {
+  return axiosInstance.post(ApiRoutes.pay(tripId));
 };

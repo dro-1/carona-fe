@@ -24,6 +24,8 @@ import shareActive from "src/assets/svg/share-active.svg";
 import logo from "src/assets/svg/logo.svg";
 import clock from "src/assets/svg/clock.svg";
 import clockActive from "src/assets/svg/clock-active.svg";
+import trip from "src/assets/svg/trip.svg";
+import tripActive from "src/assets/svg/trip-active.svg";
 import logo2 from "src/assets/svg/logo2.svg";
 import ticket from "src/assets/svg/ticket.svg";
 import cancel from "src/assets/svg/cancel.svg";
@@ -56,6 +58,8 @@ const iconTypes = {
   clock,
   clockActive,
   ticket,
+  trip,
+  tripActive,
 };
 
 export type IconType = keyof typeof iconTypes;

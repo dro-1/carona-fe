@@ -1,28 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllRoutes } from "src/api/api";
-import { RouteCard } from "src/components/dashboard/route-card";
+// import { RouteCard } from "src/components/dashboard/route-card";
 import { Icon } from "src/components/shared/icon";
-import { Loader } from "src/components/shared/loader";
-import { QueryKeys } from "src/utils/query-keys";
-import { Route, RouteType } from "src/utils/types/api-types";
 
-export const CaronaGoPage = () => {
-  const { isPending: areRoutesPending, data: routeData } = useQuery({
-    queryKey: [QueryKeys.allRoutes],
-    queryFn: () => getAllRoutes(),
-  });
-
-  const routes = routeData?.data.data;
-
+export const TripsPage = () => {
   return (
     <div className="grow">
       <header className="flex p-6 justify-between items-center w-full">
         <div className="flex flex-col">
-          <em className="not-italic font-semibold text-xl text-dark">
-            Carona Go
-          </em>
+          <em className="not-italic font-semibold text-xl text-dark">Trips</em>
           <em className="not-italic font-medium text-xs text-dim">
-            Book a ride on our buses for one of our routes.
+            View all your trips in one go.
           </em>
         </div>
         <div className="flex justify-center items-center space-x-6">
@@ -35,13 +21,13 @@ export const CaronaGoPage = () => {
               className="grow w-full outline-none"
             />
           </div>
-          <button className="w-[130px] rounded-lg border-border border flex justify-center items-center px-4 py-[10px]">
+          {/* <button className="w-[130px] rounded-lg border-border border flex justify-center items-center px-4 py-[10px]">
             <Icon type="filter" className="mr-2" />
             <em className="not-italic font-medium text-sm text-black">
               Filter
             </em>
           </button>
-          {/* <button className="bg-primary-30 border border-lightGreen flex justify-center items-center px-4 py-[10px] w-[140px] rounded-lg">
+          <button className="bg-primary-30 border border-lightGreen flex justify-center items-center px-4 py-[10px] w-[140px] rounded-lg">
             <Icon type="add" className="mr-2" />
             <em className="not-italic font-medium text-sm text-white">
               New Trip
@@ -50,11 +36,8 @@ export const CaronaGoPage = () => {
         </div>
       </header>
       <section className="px-5 mt-5 mb-10 space-y-6">
-        {areRoutesPending && <Loader className="w-8 h-8 mx-auto my-8" />}
-        {routes &&
-          routes.map((route: Route, idx: number) => (
-            <RouteCard type={RouteType.go} key={idx} route={route} />
-          ))}
+        {/* <RouteCard />
+        <RouteCard /> */}
       </section>
     </div>
   );

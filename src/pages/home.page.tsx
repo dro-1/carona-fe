@@ -188,8 +188,11 @@ export const Homepage = () => {
         </p>
         <div className="min-[850px]:flex items-center justify-between min-[850px]:my-8 max-w-[1200px] mx-auto">
           <div className="px-6 lg:w-[48%]">
-            {steps.map((step) => (
-              <div className="py-4 mb-4 border-b-2 transition group border-primary-20 hover:border-primary-10">
+            {steps.map((step, idx) => (
+              <div
+                className="py-4 mb-4 border-b-2 transition group border-primary-20 hover:border-primary-10"
+                key={idx}
+              >
                 <h3 className="group-hover:text-primary-10 text-xl">
                   {step.num}. {step.title}
                 </h3>

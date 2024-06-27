@@ -32,8 +32,10 @@ export const Navbar = () => {
       <nav className=" flex justify-between items-center w-full p-8 pb-16 max-w-[1000px] mx-auto">
         <img src={logo} className="w-[150px]" />
         <div className="hidden md:block space-x-4">
-          {navbarLinks.map((navbarLink) => (
-            <Link to={navbarLink.url}>{navbarLink.title}</Link>
+          {navbarLinks.map((navbarLink, idx) => (
+            <Link key={idx} to={navbarLink.url}>
+              {navbarLink.title}
+            </Link>
           ))}
           <Link
             className="bg-[#319A64] border-[#319A64] border-2 p-4 rounded-xl text-white"

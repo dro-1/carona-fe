@@ -6,6 +6,7 @@ import { Dashboard } from "./components/dashboard/dashboard";
 import { CaronaGoPage } from "./pages/carona-go.page";
 import { CaronaSharePage } from "./pages/carona-share.page";
 import { Verify } from "./pages/verify.page";
+import { TripsPage } from "./pages/trips.page";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="carona-go" element={<CaronaGoPage />} />
         <Route path="carona-share" element={<CaronaSharePage />} />
         <Route path="payments" element={<CaronaSharePage />} />
-        <Route path="transactions" element={<CaronaSharePage />} />
+        <Route path="trips" element={<TripsPage />} />
         <Route path="settings" element={<CaronaSharePage />} />
         <Route path="support" element={<CaronaSharePage />} />
       </Route>

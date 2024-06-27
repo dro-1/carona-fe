@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Icon } from "../shared/icon";
 import { Image } from "../shared/image";
 import {
@@ -6,19 +6,21 @@ import {
   OverlayContextType,
 } from "src/context/overlay.context";
 import { useMutation } from "@tanstack/react-query";
-import { getRouteInfo } from "src/api/api";
+import { getPaymentLink, getRouteInfo } from "src/api/api";
 import { MutationKeys } from "src/utils/mutation-keys";
 import { Loader } from "../shared/loader";
+import { UserContext, UserContextType } from "src/context/user.context";
 
 export const RouteOverlay: React.FC = () => {
   const { setRouteOverlayOpened, overlayRoute } = useContext(
     OverlayContext
   ) as OverlayContextType;
+  const { setTicketId } = useContext(UserContext) as UserContextType;
 
   const {
     isPending: isRouteInfoPending,
     data: routeInfoData,
-    mutate,
+    mutate: mGetRouteInfo,
   } = useMutation({
     mutationKey: [MutationKeys.getRouteInfo],
     mutationFn: (routeId: string) => getRouteInfo(routeId),
@@ -26,8 +28,25 @@ export const RouteOverlay: React.FC = () => {
     onError: (e) => console.log(e.message),
   });
 
+  const { isPending: isPaymentLinkLoading, mutate: mGetPaymentLink } =
+    useMutation({
+      mutationKey: [MutationKeys.getPaymentLink],
+      mutationFn: (tripId: string) => getPaymentLink(tripId),
+      onSuccess: (data) => {
+        console.log(data);
+        const paymentLink = data.data.data.link;
+        console.log(paymentLink);
+        window.location.href = paymentLink;
+      },
+      onError: (e) => console.log(e.message),
+    });
+
   const routeInfo = routeInfoData?.data.data;
   console.log({ routeInfo });
+
+  useEffect(() => {
+    if (routeInfo) setTicketId(routeInfo.trip._id);
+  }, [routeInfo, setTicketId]);
 
   return (
     <div
@@ -117,10 +136,14 @@ export const RouteOverlay: React.FC = () => {
       <div className="flex items-center my-4">
         <button
           className="text-white ml-auto bg-[#212121] border border-black flex items-center px-3 py-2 rounded-lg"
-          onClick={() => !routeInfoData && mutate(overlayRoute?._id ?? "")}
-          disabled={isRouteInfoPending}
+          onClick={() =>
+            routeInfoData
+              ? mGetPaymentLink(routeInfo.trip._id)
+              : mGetRouteInfo(overlayRoute?._id ?? "")
+          }
+          disabled={isRouteInfoPending || isPaymentLinkLoading}
         >
-          {isRouteInfoPending ? (
+          {isRouteInfoPending || isPaymentLinkLoading ? (
             <Loader className="mx-auto" />
           ) : (
             <>

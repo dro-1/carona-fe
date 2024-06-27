@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { Icon, IconType } from "../shared/icon";
+import { Icon, IconType as LocalIconType } from "../shared/icon";
 import clsx from "clsx";
 import { Image } from "../shared/image";
 import { Overlay } from "../shared/overlay";
@@ -8,16 +8,20 @@ import {
   OverlayContext,
   OverlayContextType,
 } from "src/context/overlay.context";
-import { UserContext, UserContextType } from "src/context/user.context";
 import { RouteOverlay } from "./route-overlay";
+import { QueryKeys } from "src/utils/query-keys";
+import { getUser } from "src/api/api";
+import { IoIosLogOut } from "react-icons/io";
+import { useQuery } from "@tanstack/react-query";
+import { Loader } from "../shared/loader";
 // import { useQuery } from "@tanstack/react-query";
 // import { QueryKeys } from "src/utils/query-keys";
 // import { getUser } from "src/api/api";
 // import { Loader } from "../shared/loader";
 
 type UrlLink = {
-  inactiveIcon: IconType;
-  activeIcon: IconType;
+  inactiveIcon: LocalIconType;
+  activeIcon: LocalIconType;
   text: string;
   link: string;
 };
@@ -36,16 +40,16 @@ const mainLinks: UrlLink[] = [
     link: "/dashboard/carona-share",
   },
   {
+    text: "Trips",
+    inactiveIcon: "trip",
+    activeIcon: "tripActive",
+    link: "/dashboard/trips",
+  },
+  {
     text: "Payments",
     inactiveIcon: "debitCard",
     activeIcon: "debitCardActive",
     link: "/dashboard/payments",
-  },
-  {
-    text: "Transactions",
-    inactiveIcon: "clock",
-    activeIcon: "clockActive",
-    link: "/dashboard/transactions",
   },
 ];
 
@@ -68,17 +72,19 @@ export const Dashboard = () => {
   const { isRouteOverlayOpened } = useContext(
     OverlayContext
   ) as OverlayContextType;
-  const { user } = useContext(UserContext) as UserContextType;
   const navigate = useNavigate();
 
-  // const { isPending: isUserDataPending, data: userData } = useQuery({
-  //   queryKey: [QueryKeys.getUser],
-  //   queryFn: () => getUser(user?._id ?? ""),
-  // });
+  const { isPending: isUserDataPending, data: userData } = useQuery({
+    queryKey: [QueryKeys.getUser],
+    queryFn: () => getUser(),
+  });
 
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) navigate("/login");
-  }, [user]);
+  }, []);
+
+  const user = userData?.data.data.user;
+  console.log(user);
 
   return (
     <div
@@ -188,22 +194,57 @@ export const Dashboard = () => {
             </ul>
           </section>
           <div className="grow" />
-          <div className="border-t border-[#EAECF0] flex items-center">
-            <Image type="user" alt="" className="w-10 h-10 rounded-full mr-3" />
-            <div className="flex flex-col justify-center py-7">
-              <em className="not-italic font-semibold text-sm block mb-2 text-dark">
-                {user?.firstName} {user?.lastName}
-              </em>
-              <em className="not-italic font-medium text-xs text-dim">
-                {user?.email}
-              </em>
-            </div>
-            <div className="grow" />
-            <Icon type="greaterThan" />
-          </div>
+
+          {isUserDataPending ? (
+            <Loader className="mx-auto my-4" />
+          ) : (
+            <>
+              <button
+                className={clsx(
+                  "flex items-center px-2 py-[10px] rounded-lg hover:bg-sidebarBg"
+                )}
+                onClick={() => {
+                  localStorage.removeItem("accessToken");
+                  navigate("/login");
+                }}
+              >
+                <div className="flex justify-between items-center w-full">
+                  <div>
+                    <IoIosLogOut className="inline-block w-6 h-6 mr-2" />
+                    <em
+                      className={clsx(
+                        "not-italic inline-block text-sm font-normal text-dim"
+                      )}
+                    >
+                      Log Out
+                    </em>
+                  </div>
+                </div>
+              </button>
+              <div className="border-t border-[#EAECF0] flex items-center">
+                <Image
+                  type="user"
+                  alt=""
+                  className="w-10 h-10 rounded-full mr-3"
+                />
+                <div className="flex flex-col justify-center py-7">
+                  <em className="not-italic font-semibold text-sm block mb-2 text-dark">
+                    {user?.firstName} {user?.lastName}
+                  </em>
+                  <em className="not-italic font-medium text-xs text-dim">
+                    {user?.email}
+                  </em>
+                </div>
+                <div className="grow" />
+                <Icon type="greaterThan" />
+              </div>
+            </>
+          )}
         </nav>
       </aside>
-      <Outlet />
+      <div className="h-screen overflow-y-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };
