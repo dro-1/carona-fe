@@ -86,7 +86,7 @@ export const RouteCard: React.FC<{ route: Route; type: RouteType }> = ({
                 <Icon type="locationPin" />
               </div>
               <h2 className="font-semibold text-base text-black">
-                Trip Details
+                Route Details
               </h2>
             </div>
             <div className="flex items-center">

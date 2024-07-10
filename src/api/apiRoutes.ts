@@ -6,4 +6,5 @@ export const ApiRoutes = {
   getUser: "/auth/getUser/",
   getRouteInfo: (routeId: string) => `/routes/${routeId}/trips`,
   pay: (tripId: string) => `/payments/pay/${tripId}`,
+  getNotifications: "/notifications",
 };

@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllRoutes } from "src/api/api";
+import clsx from "clsx";
+import { useState } from "react";
+import { getAllRoutes, getNotifications } from "src/api/api";
 import { RouteCard } from "src/components/dashboard/route-card";
 import { Icon } from "src/components/shared/icon";
 import { Loader } from "src/components/shared/loader";
@@ -12,7 +14,27 @@ export const CaronaGoPage = () => {
     queryFn: () => getAllRoutes(),
   });
 
+  const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
+
+  const {
+    isPending: isNotificationsLoading,
+    data: notificationData,
+    error: notificationsError,
+  } = useQuery({
+    queryKey: [QueryKeys.getNotifications],
+    queryFn: () => getNotifications(),
+    enabled: isNotificationEnabled,
+  });
+
   const routes = routeData?.data.data;
+  const notifications: [] = notificationData?.data.data;
+
+  const notifs = [
+    "Your ride just got accepted.",
+    "Your ride just got accepted.",
+    "Your ride just got accepted.",
+    "Your ride just got accepted.",
+  ];
 
   return (
     <div className="grow">
@@ -25,8 +47,54 @@ export const CaronaGoPage = () => {
             Book a ride on our buses for one of our routes.
           </em>
         </div>
-        <div className="flex justify-center items-center space-x-6">
-          <Icon type="notification" className="w-6 h-6" />
+        <div className="flex justify-center items-center space-x-6 relative">
+          <Icon
+            type="notification"
+            className="w-6 h-6 cursor-pointer"
+            onClick={() => {
+              setIsNotificationEnabled(
+                (isNotificationEnabled) => !isNotificationEnabled
+              );
+            }}
+          />
+          {!!isNotificationEnabled && (
+            <div className="absolute top-12 -left-6 border border-[#ccc] rounded-lg w-[450px] h-[250px] overflow-y-auto p-4 bg-white">
+              <h2 className="text-lg font-medium mb-4">Notifications</h2>
+              {/* <button
+                className="absolute right-4 top-4"
+                onClick={() => {
+                  setIsNotificationEnabled(false);
+                }}
+              >
+                <MdCancel className="w-6 h-6 text-red-500" />
+              </button> */}
+              {isNotificationsLoading ? (
+                <Loader className="w-6 h-6 mx-auto my-6" />
+              ) : notificationsError ? (
+                <p className="text-center">
+                  An error occurred. Please try again
+                </p>
+              ) : (
+                notifications.map(
+                  (notification: { message: string }, idx: number) => (
+                    <p
+                      key={idx}
+                      className={clsx(
+                        "py-3 border-[#ccc]",
+                        idx != 0 && notifications.length > 1 && "border-t",
+                        idx != notifs.length - 1 &&
+                          notifications.length > 1 &&
+                          "border-b"
+                      )}
+                    >
+                      {notification.message}
+                    </p>
+                  )
+                )
+              )}
+            </div>
+          )}
+
           <Icon type="help" className="w-6 h-6" />
           <div className="flex bg-white shadow-dishCard px-4 py-[10px] items-center rounded-lg w-[200px] border border-border">
             <Icon type="search" className="w-4 h-4 mr-2" />

@@ -23,23 +23,23 @@ const features = [
 const steps = [
   {
     num: 1,
-    title: "Type Your Destination",
-    text: "Totam facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.",
+    title: "Check our available routes",
+    text: "Choose from one of the major routes that Carona plies.",
   },
   {
     num: 2,
-    title: "Confirm Pick-up Location",
-    text: "Totam facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.",
+    title: "Choose Payment Method",
+    text: "Make payment for your desired route",
   },
   {
     num: 3,
-    title: "Choose Payment Method",
-    text: "Totam facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.",
+    title: "Show up at the pick-up spot",
+    text: "Show your ticket to the driver on getting to the pickup spot.",
   },
   {
     num: 4,
-    title: "Driver on the way to pick up",
-    text: "Totam facilis laudantium cum accusamus ullam voluptatibus commodi numquam, error, est. Ea, consequatur.",
+    title: "Drop off at your destination",
+    text: "Get to the drop-off point and go along on your merry day.",
   },
 ];
 
@@ -127,14 +127,15 @@ export const Homepage = () => {
               Make your travel experience as easy and stress-free as possible
             </h3>
             <p className="mt-4">
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-              aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Neque porro quisquam est qui dolorem
-              ipsum.{" "}
+              At Carona, we make travel enjoyable and convenient. Our
+              user-friendly interface allows you to quickly find and connect
+              with carpool partners. Safety is our top priority, with thorough
+              verification of all drivers and passengers. Enjoy a seamless,
+              stress-free journey with us!
             </p>
             <div className="mt-4">
-              {features.map((feature) => (
-                <div className="flex items-center mb-2">
+              {features.map((feature, idx) => (
+                <div className="flex items-center mb-2" key={idx}>
                   <div className="inline-block mr-2 h-[28px] w-[28px] rounded-full bg-[#E2F4EA] relative">
                     <img
                       src={checkmark}
@@ -154,10 +155,11 @@ export const Homepage = () => {
               Ensuring your safety is guaranteed
             </h3>
             <p className="mt-4">
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-              aut fugit, sed quia consequuntur magni dolores eos qui ratione
-              voluptatem sequi nesciunt. Neque porro quisquam est qui dolorem
-              ipsum.{" "}
+              Your safety is our top priority. We ensure all drivers and
+              passengers are thoroughly verified, and we offer in-app features
+              like real-time tracking and emergency support. Travel with peace
+              of mind knowing that we are committed to your safety every step of
+              the way.
             </p>
           </div>
           <div className="mt-8 md:w-[48%] max-w-[410px]">
@@ -166,14 +168,20 @@ export const Homepage = () => {
                 <img className="w-[30px]" src={shield} />
               </div>
               <h3 className="mb-2 text-xl">Safety Measures</h3>
-              <p>Sed adipisci velit, sed quia non numquam eius modi tempora </p>
+              <p>
+                We verify all users and provide real-time tracking and emergency
+                support, ensuring you can travel with confidence.
+              </p>
             </div>
             <div className="mb-4">
               <div className="w-[50px] h-[50px] rounded-full bg-[#E2F4EA] flex justify-center items-center mb-2">
                 <img className="w-[30px]" src={car} />
               </div>
               <h3 className="mb-2 text-xl">Well-Maintained Vehicles</h3>
-              <p>Sed adipisci velit, sed quia non numquam eius modi tempora </p>
+              <p>
+                All vehicles are regularly inspected and maintained to ensure
+                your comfort and safety on every trip.{" "}
+              </p>
             </div>
           </div>
         </div>
@@ -183,8 +191,7 @@ export const Homepage = () => {
           Simple Steps to Book Your Ride
         </h3>
         <p className="text-center mt-4 max-w-[370px] md:max-w-[600px] mx-auto">
-          Neque porro quisquam est qui dolorem ipsum adipisci velit, sed quia
-          non numquam eius modi tempora incidunt ut labore et{" "}
+          You are just 4 steps away from getting to your destination ...
         </p>
         <div className="min-[850px]:flex items-center justify-between min-[850px]:my-8 max-w-[1200px] mx-auto">
           <div className="px-6 lg:w-[48%]">

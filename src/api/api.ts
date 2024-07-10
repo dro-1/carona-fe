@@ -54,3 +54,7 @@ export const getRouteInfo = (routeId: string) => {
 export const getPaymentLink = (tripId: string) => {
   return axiosInstance.post(ApiRoutes.pay(tripId));
 };
+
+export const getNotifications = () => {
+  return axiosInstance.get(ApiRoutes.getNotifications);
+};

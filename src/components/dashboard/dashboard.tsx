@@ -242,7 +242,7 @@ export const Dashboard = () => {
           )}
         </nav>
       </aside>
-      <div className="h-screen overflow-y-auto">
+      <div className="h-screen overflow-y-auto grow">
         <Outlet />
       </div>
     </div>

@@ -15,10 +15,6 @@ const navbarLinks = [
     title: "About",
   },
   {
-    url: "/driver",
-    title: "Driver",
-  },
-  {
     url: "/blog",
     title: "Blog",
   },
