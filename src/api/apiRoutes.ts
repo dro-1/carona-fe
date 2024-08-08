@@ -7,4 +7,9 @@ export const ApiRoutes = {
   getRouteInfo: (routeId: string) => `/routes/${routeId}/trips`,
   pay: (tripId: string) => `/payments/pay/${tripId}`,
   getNotifications: "/notifications",
+  getCaronaShareTrips: "/trips/caronashare/trips",
+  createCaronaShareTrip: "/trips/caronashare/create",
+  registerAsHostCaronaShare: "/auth/caronashare/registerToShare",
+  registerAsRiderCaronaShare: "/auth/caronashare/registerToRide",
+  joinCaronaShareRide: (tripId: string) => `/trips/caronashare/share/${tripId}`,
 };

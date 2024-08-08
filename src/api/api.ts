@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   CreateUserType,
   LoginType,
+  RegisterCaronaShareHostType,
+  RegisterCaronaShareRiderType,
   VerifyUserType,
 } from "src/utils/types/api-types";
 import { ApiRoutes } from "./apiRoutes";
@@ -57,4 +59,29 @@ export const getPaymentLink = (tripId: string) => {
 
 export const getNotifications = () => {
   return axiosInstance.get(ApiRoutes.getNotifications);
+};
+
+export const getCaronaShareTrips = () => {
+  return axiosInstance.get(ApiRoutes.getCaronaShareTrips);
+};
+
+export const createCaronaShareTrip = (departure: string, arrival: string) => {
+  return axiosInstance.post(ApiRoutes.createCaronaShareTrip, {
+    start: departure,
+    end: arrival,
+  });
+};
+
+export const registerCaronaShareHost = (data: RegisterCaronaShareHostType) => {
+  return axiosInstance.post(ApiRoutes.registerAsHostCaronaShare, data);
+};
+
+export const registerCaronaShareRider = (
+  data: RegisterCaronaShareRiderType
+) => {
+  return axiosInstance.post(ApiRoutes.registerAsRiderCaronaShare, data);
+};
+
+export const joinCaronaShareRide = (tripId: string) => {
+  return axiosInstance.post(ApiRoutes.joinCaronaShareRide(tripId));
 };

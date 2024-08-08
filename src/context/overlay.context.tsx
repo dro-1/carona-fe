@@ -5,18 +5,22 @@ import {
   createContext,
   useState,
 } from "react";
-import { Route } from "src/utils/types/api-types";
+import { CaronaShareRoute, Route } from "src/utils/types/api-types";
 
 export type OverlayContextType = {
   isRouteOverlayOpened: boolean;
-  overlayRoute: Route | null;
-  setOverlayRoute: Dispatch<SetStateAction<Route | null>>;
+  isNewCaronaShareOverlayOpened: boolean;
+  overlayRoute: Route | CaronaShareRoute | null;
+  setIsNewCaronaShareOverlayOpened: Dispatch<SetStateAction<boolean>>;
+  setOverlayRoute: Dispatch<SetStateAction<Route | CaronaShareRoute | null>>;
   setRouteOverlayOpened: Dispatch<SetStateAction<boolean>>;
 };
 
 export const OverlayContext = createContext<OverlayContextType | null>({
   isRouteOverlayOpened: false,
+  isNewCaronaShareOverlayOpened: false,
   setRouteOverlayOpened: () => {},
+  setIsNewCaronaShareOverlayOpened: () => {},
   setOverlayRoute: () => {},
   overlayRoute: null,
 });
@@ -25,13 +29,19 @@ export const OverlayContextProvider: React.FC<PropsWithChildren> = ({
   children,
 }) => {
   const [isRouteOverlayOpened, setRouteOverlayOpened] = useState(false);
-  const [overlayRoute, setOverlayRoute] = useState<Route | null>(null);
+  const [isNewCaronaShareOverlayOpened, setIsNewCaronaShareOverlayOpened] =
+    useState(false);
+  const [overlayRoute, setOverlayRoute] = useState<
+    Route | CaronaShareRoute | null
+  >(null);
 
   return (
     <OverlayContext.Provider
       value={{
         overlayRoute,
+        isNewCaronaShareOverlayOpened,
         setOverlayRoute,
+        setIsNewCaronaShareOverlayOpened,
         isRouteOverlayOpened,
         setRouteOverlayOpened,
       }}

@@ -10,14 +10,18 @@ export const Overlay: React.FC<PropsWithChildren<{ className?: string }>> = ({
   className,
   children,
 }) => {
-  const { isRouteOverlayOpened, setRouteOverlayOpened } = useContext(
-    OverlayContext
-  ) as OverlayContextType;
+  const {
+    isRouteOverlayOpened,
+    isNewCaronaShareOverlayOpened,
+    setIsNewCaronaShareOverlayOpened,
+    setRouteOverlayOpened,
+  } = useContext(OverlayContext) as OverlayContextType;
 
   useLockScroll(true);
 
   const handleClose = () => {
     if (isRouteOverlayOpened) setRouteOverlayOpened(false);
+    if (isNewCaronaShareOverlayOpened) setIsNewCaronaShareOverlayOpened(false);
   };
 
   return (

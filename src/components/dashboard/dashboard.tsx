@@ -8,12 +8,13 @@ import {
   OverlayContext,
   OverlayContextType,
 } from "src/context/overlay.context";
-import { RouteOverlay } from "./route-overlay";
+import { RouteOverlay } from "../overlays/route-overlay";
 import { QueryKeys } from "src/utils/query-keys";
 import { getUser } from "src/api/api";
 import { IoIosLogOut } from "react-icons/io";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "../shared/loader";
+import { NewCaronaShareOverlay } from "../overlays/new-carona-share-overlay";
 // import { useQuery } from "@tanstack/react-query";
 // import { QueryKeys } from "src/utils/query-keys";
 // import { getUser } from "src/api/api";
@@ -55,21 +56,21 @@ const mainLinks: UrlLink[] = [
 
 const otherLinks: UrlLink[] = [
   {
-    text: "Settings",
+    text: "Profile",
     inactiveIcon: "settings",
     activeIcon: "settingsActive",
-    link: "/settings",
+    link: "/dashboard/profile",
   },
   {
     text: "Support",
     inactiveIcon: "headphones",
     activeIcon: "headphonesActive",
-    link: "/support",
+    link: "/dashboard/support",
   },
 ];
 
 export const Dashboard = () => {
-  const { isRouteOverlayOpened } = useContext(
+  const { isRouteOverlayOpened, isNewCaronaShareOverlayOpened } = useContext(
     OverlayContext
   ) as OverlayContextType;
   const navigate = useNavigate();
@@ -84,7 +85,6 @@ export const Dashboard = () => {
   }, []);
 
   const user = userData?.data.data.user;
-  console.log(user);
 
   return (
     <div
@@ -96,6 +96,11 @@ export const Dashboard = () => {
       {isRouteOverlayOpened && (
         <Overlay>
           <RouteOverlay />
+        </Overlay>
+      )}
+      {isNewCaronaShareOverlayOpened && (
+        <Overlay>
+          <NewCaronaShareOverlay />
         </Overlay>
       )}
 
@@ -236,7 +241,6 @@ export const Dashboard = () => {
                   </em>
                 </div>
                 <div className="grow" />
-                <Icon type="greaterThan" />
               </div>
             </>
           )}

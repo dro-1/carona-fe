@@ -1,7 +1,29 @@
 // import { RouteCard } from "src/components/dashboard/route-card";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
+import { getCaronaShareTrips } from "src/api/api";
+import { RouteCard } from "src/components/dashboard/route-card";
 import { Icon } from "src/components/shared/icon";
+import { Loader } from "src/components/shared/loader";
+import {
+  OverlayContext,
+  OverlayContextType,
+} from "src/context/overlay.context";
+import { QueryKeys } from "src/utils/query-keys";
+import { CaronaShareRoute, RouteType } from "src/utils/types/api-types";
 
 export const CaronaSharePage = () => {
+  const { isPending: areRoutesPending, data: routeData } = useQuery({
+    queryKey: [QueryKeys.getCaronaShareTrips],
+    queryFn: () => getCaronaShareTrips(),
+  });
+
+  const { setIsNewCaronaShareOverlayOpened } = useContext(
+    OverlayContext
+  ) as OverlayContextType;
+
+  const routes = routeData?.data.data;
+
   return (
     <div className="grow">
       <header className="flex p-6 justify-between items-center w-full">
@@ -28,18 +50,24 @@ export const CaronaSharePage = () => {
             <em className="not-italic font-medium text-sm text-black">
               Filter
             </em>
-          </button>
-          <button className="bg-primary-30 border border-lightGreen flex justify-center items-center px-4 py-[10px] w-[140px] rounded-lg">
+          </button> */}
+          <button
+            className="bg-primary-30 border-lightGreen flex justify-center items-center px-4 py-[10px] w-[250px] rounded-lg"
+            onClick={() => setIsNewCaronaShareOverlayOpened(true)}
+          >
             <Icon type="add" className="mr-2" />
             <em className="not-italic font-medium text-sm text-white">
-              New Trip
+              New Carona Share Trip
             </em>
-          </button> */}
+          </button>
         </div>
       </header>
       <section className="px-5 mt-5 mb-10 space-y-6">
-        {/* <RouteCard />
-        <RouteCard /> */}
+        {areRoutesPending && <Loader className="w-8 h-8 mx-auto my-8" />}
+        {routes &&
+          routes.map((route: CaronaShareRoute, idx: number) => (
+            <RouteCard type={RouteType.share} key={idx} route={route} />
+          ))}
       </section>
     </div>
   );

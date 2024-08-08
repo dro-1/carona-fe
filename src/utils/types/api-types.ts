@@ -36,6 +36,28 @@ export type Route = {
   _id: string;
 };
 
+export type CaronaShareRoute = {
+  start: string;
+  end: string;
+  estimatedTravelTime: string;
+  price: string;
+  departureTime: string;
+  arrivalTime: string;
+  _id: string;
+};
+
+export type RegisterCaronaShareHostType = {
+  NIN: string;
+  vehicleType: string;
+  vehicleModel: string;
+  vehicleColour: string;
+  vehiclePlateNumber: string;
+};
+
+export type RegisterCaronaShareRiderType = {
+  NIN: string;
+};
+
 export enum RouteType {
   go,
   share,
