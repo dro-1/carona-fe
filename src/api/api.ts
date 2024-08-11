@@ -7,6 +7,7 @@ import {
   VerifyUserType,
 } from "src/utils/types/api-types";
 import { ApiRoutes } from "./apiRoutes";
+import { jwtDecode } from "jwt-decode";
 
 export const BASE_URL = "https://carona-6a9f.onrender.com/api";
 
@@ -23,6 +24,43 @@ export const axiosInstance = axios.create({
 
   baseURL: BASE_URL,
 });
+
+const clearCredentials = () => {
+  localStorage.removeItem("accessToken");
+};
+
+axiosInstance.interceptors.request.use(
+  async (config) => {
+    // get both tokens from local storage
+    let accessToken: string = localStorage.getItem("accessToken") || "";
+
+    if (accessToken) {
+      const decodedAccessToken = jwtDecode(accessToken);
+
+      // if access token hasn't expired, just go ahead with the request
+      if (new Date(Number(decodedAccessToken.exp + "000")) < new Date()) {
+        clearCredentials();
+      } else {
+        //Check current value of accessToken
+        accessToken = localStorage.getItem("accessToken") || "";
+
+        //if access token exists, attach it to request, otherwise ignore it
+        config.headers.Authorization = accessToken
+          ? `Bearer ${accessToken}`
+          : "";
+      }
+    }
+
+    if (!accessToken) {
+      clearCredentials();
+    }
+    return config;
+  },
+  (err) => {
+    console.log(err);
+    return err;
+  }
+);
 
 export const registerUser = (data: CreateUserType) => {
   return axiosInstance.post(ApiRoutes.register, {

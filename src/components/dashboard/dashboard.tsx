@@ -12,7 +12,7 @@ import { RouteOverlay } from "../overlays/route-overlay";
 import { QueryKeys } from "src/utils/query-keys";
 import { getUser } from "src/api/api";
 import { IoIosLogOut } from "react-icons/io";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loader } from "../shared/loader";
 import { NewCaronaShareOverlay } from "../overlays/new-carona-share-overlay";
 // import { useQuery } from "@tanstack/react-query";
@@ -74,6 +74,7 @@ export const Dashboard = () => {
     OverlayContext
   ) as OverlayContextType;
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { isPending: isUserDataPending, data: userData } = useQuery({
     queryKey: [QueryKeys.getUser],
@@ -211,6 +212,7 @@ export const Dashboard = () => {
                 onClick={() => {
                   localStorage.removeItem("accessToken");
                   navigate("/login");
+                  queryClient.clear();
                 }}
               >
                 <div className="flex justify-between items-center w-full">

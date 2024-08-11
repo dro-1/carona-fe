@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MutationKeys } from "src/utils/mutation-keys";
 import { LoginType } from "src/utils/types/api-types";
 import { login } from "src/api/api";
@@ -35,6 +35,8 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const { isPending: isLoginPending, mutate: loginMutate } = useMutation({
     mutationKey: [MutationKeys.login],
     mutationFn: (data: LoginType) => login(data),
@@ -44,6 +46,7 @@ export const Login = () => {
       localStorage.setItem("accessToken", data.data.data.jwt.token);
       toast.success("User logged in successfully");
       navigate("/dashboard/carona-go");
+      queryClient.removeQueries();
     },
     onError: (data) => {
       console.log(data);
