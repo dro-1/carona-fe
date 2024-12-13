@@ -1,0 +1,15 @@
+export const ApiRoutes = {
+  register: "/auth/register",
+  login: "/auth/login",
+  verify: (email: string) => `/auth/verifyUser?email=${email}`,
+  allRoutes: "/routes",
+  getUser: "/auth/getUser/",
+  getRouteInfo: (routeId: string) => `/routes/${routeId}/trips`,
+  pay: (tripId: string) => `/payments/pay/${tripId}`,
+  getNotifications: "/notifications",
+  getCaronaShareTrips: "/trips/caronashare/trips",
+  createCaronaShareTrip: "/trips/caronashare/create",
+  registerAsHostCaronaShare: "/auth/caronashare/registerToShare",
+  registerAsRiderCaronaShare: "/auth/caronashare/registerToRide",
+  joinCaronaShareRide: (tripId: string) => `/trips/caronashare/share/${tripId}`,
+};
